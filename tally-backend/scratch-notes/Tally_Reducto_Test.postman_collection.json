@@ -1,0 +1,89 @@
+{
+    "info": {
+        "name": "Tally Reducto Test",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Test Reducto Direct Processing",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "file",
+                            "type": "file",
+                            "src": [],
+                            "description": "PDF document to process"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://localhost:8000/test_reducto",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "test_reducto"
+                    ]
+                },
+                "description": "Tests Reducto document processing by directly sending file content"
+            },
+            "response": [
+                {
+                    "name": "Successful Response",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "file",
+                                    "type": "file",
+                                    "src": []
+                                }
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "parse_result": {
+                            "document_id": "doc_abc123",
+                            "status": "COMPLETED",
+                            "processing_time_ms": 1234
+                        },
+                        "extract_result": {
+                            "content": "Sample extracted content...",
+                            "citations": [
+                                {
+                                    "text": "Important policy statement",
+                                    "page": 1,
+                                    "bbox": [100, 200, 300, 220]
+                                }
+                            ]
+                        },
+                        "status": "success"
+                    }
+                }
+            ]
+        }
+    ]
+} 

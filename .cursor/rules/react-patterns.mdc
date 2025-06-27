@@ -1,0 +1,106 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# React Component Patterns for Tally
+
+## Component Architecture
+
+### Main Components
+- **TabularReview** ([tally-frontend/components/tabular-review.tsx](mdc:tally-frontend/components/tabular-review.tsx)): Primary table interface using TanStack Table
+- **UI Components** ([tally-frontend/components/ui/](mdc:tally-frontend/components/ui)): Reusable Radix UI + Tailwind components
+
+### Component Structure Patterns
+
+#### 1. Route Components
+Located in [tally-frontend/app/routes/](mdc:tally-frontend/app/routes) - Handle routing, meta data, and top-level state management.
+
+```typescript
+export function meta({}: Route.MetaArgs) {
+  return [{ title: "Page Title" }];
+}
+
+export default function RouteComponent() {
+  // State management
+  // Return main component
+}
+```
+
+#### 2. Feature Components
+Located in [tally-frontend/components/](mdc:tally-frontend/components) - Implement core business logic and UI.
+
+```typescript
+interface ComponentProps {
+  // Typed props
+}
+
+export function Component({ prop }: ComponentProps) {
+  // Hooks and state
+  // Business logic
+  // Return JSX
+}
+```
+
+#### 3. UI Components
+Located in [tally-frontend/components/ui/](mdc:tally-frontend/components/ui) - Reusable, styled components following shadcn/ui patterns.
+
+## State Management Patterns
+
+### Current Patterns in TabularReview
+- `useState` for local component state
+- `useMemo` for computed values and performance optimization
+- `useCallback` for event handlers
+- `Map` for efficient key-value storage (cell data)
+
+### State Structure Examples
+```typescript
+const [documents, setDocuments] = useState<Document[]>([]);
+const [controls, setControls] = useState<Control[]>([]);
+const [cellData, setCellData] = useState<Map<string, CellData>>(new Map());
+```
+
+## TanStack Table Integration
+
+### Table Configuration
+- Column definitions with meta properties for filtering
+- Row selection and sorting capabilities
+- Custom cell rendering for different states (loading, completed, error)
+
+### Key Files
+- Table setup: [tally-frontend/components/tabular-review.tsx](mdc:tally-frontend/components/tabular-review.tsx)
+- Table components: [tally-frontend/components/ui/table.tsx](mdc:tally-frontend/components/ui/table.tsx)
+
+## Styling Approach
+
+### Tailwind CSS + CSS Variables
+- Global styles in [tally-frontend/app/app.css](mdc:tally-frontend/app/app.css)
+- Component styles using Tailwind classes
+- Design system variables for consistent theming
+
+### Utility Function
+- `cn()` helper in [tally-frontend/lib/utils.ts](mdc:tally-frontend/lib/utils.ts) for conditional className merging
+
+## Component Communication
+
+### Props Pattern
+- Typed interfaces for all component props
+- Optional props with default values
+- Callback props for parent-child communication
+
+### Example from TabularReview
+```typescript
+interface TabularReviewProps {
+  controlName?: string;
+  controlDescription?: string;
+  onControlUpdate?: (name: string, description: string) => void;
+}
+```
+
+## Performance Considerations
+
+### Optimization Techniques Used
+- `useMemo` for expensive computations (table columns, filtered data)
+- `useCallback` for stable function references
+- Map-based state for O(1) lookups
+- Component memoization where appropriate

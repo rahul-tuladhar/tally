@@ -1,0 +1,609 @@
+{
+  "info": {
+    "name": "Tally Tabular Review API - Updated",
+    "description": "Complete API collection for Tally backend services including Controls, Storage/Documents, Tabular View, and AI Responses",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "api_version",
+      "value": "v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Controls",
+      "item": [
+        {
+          "name": "Create Control",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Data Privacy Control\",\n  \"description\": \"Evaluate data privacy measures in the document\",\n  \"prompt\": \"Does this document contain adequate data privacy protections?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/controls/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "controls", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Controls",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/controls/?include_inactive=false",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "controls", ""],
+              "query": [
+                {
+                  "key": "include_inactive",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Control with Documents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/controls/:control_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "controls", ":control_id"],
+              "variable": [
+                {
+                  "key": "control_id",
+                  "value": "{{control_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Control",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Control Title\",\n  \"description\": \"Updated description\",\n  \"prompt\": \"Updated prompt question?\",\n  \"is_active\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/controls/:control_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "controls", ":control_id"],
+              "variable": [
+                {
+                  "key": "control_id",
+                  "value": "{{control_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Activate Control",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/controls/:control_id/activate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "controls", ":control_id", "activate"],
+              "variable": [
+                {
+                  "key": "control_id",
+                  "value": "{{control_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deactivate Control",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/controls/:control_id/deactivate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "controls", ":control_id", "deactivate"],
+              "variable": [
+                {
+                  "key": "control_id",
+                  "value": "{{control_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Control",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/controls/:control_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "controls", ":control_id"],
+              "variable": [
+                {
+                  "key": "control_id",
+                  "value": "{{control_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Storage & Documents",
+      "item": [
+        {
+          "name": "Storage Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Buckets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/buckets",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "buckets"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Bucket",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/buckets?bucket_name=test-bucket&public=false&file_size_limit=52428800",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "buckets"],
+              "query": [
+                {
+                  "key": "bucket_name",
+                  "value": "test-bucket"
+                },
+                {
+                  "key": "public",
+                  "value": "false"
+                },
+                {
+                  "key": "file_size_limit",
+                  "value": "52428800"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Upload URL",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/upload-url?file_name=test-document.pdf&content_type=application/pdf&bucket_name=tally-documents&user_id=user123",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "upload-url"],
+              "query": [
+                {
+                  "key": "file_name",
+                  "value": "test-document.pdf"
+                },
+                {
+                  "key": "content_type",
+                  "value": "application/pdf"
+                },
+                {
+                  "key": "bucket_name",
+                  "value": "tally-documents"
+                },
+                {
+                  "key": "user_id",
+                  "value": "user123"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Download URL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/download-url?file_path=user123/test-document.pdf&bucket_name=tally-documents&expires_in=3600",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "download-url"],
+              "query": [
+                {
+                  "key": "file_path",
+                  "value": "user123/test-document.pdf"
+                },
+                {
+                  "key": "bucket_name",
+                  "value": "tally-documents"
+                },
+                {
+                  "key": "expires_in",
+                  "value": "3600"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Files",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/files?bucket_name=tally-documents&path=&limit=100",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "files"],
+              "query": [
+                {
+                  "key": "bucket_name",
+                  "value": "tally-documents"
+                },
+                {
+                  "key": "path",
+                  "value": ""
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get File Metadata",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/files/:file_path/metadata?bucket_name=tally-documents",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "files", ":file_path", "metadata"],
+              "variable": [
+                {
+                  "key": "file_path",
+                  "value": "user123/test-document.pdf"
+                }
+              ],
+              "query": [
+                {
+                  "key": "bucket_name",
+                  "value": "tally-documents"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete File",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/files/:file_path?bucket_name=tally-documents",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "files", ":file_path"],
+              "variable": [
+                {
+                  "key": "file_path",
+                  "value": "user123/test-document.pdf"
+                }
+              ],
+              "query": [
+                {
+                  "key": "bucket_name",
+                  "value": "tally-documents"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Test Upload Workflow",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/documents/test-workflow",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "documents", "test-workflow"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tabular View",
+      "item": [
+        {
+          "name": "Get Complete Tabular View",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/tabular/view",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "tabular", "view"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Processing Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/tabular/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "tabular", "status"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI Responses",
+      "item": [
+        {
+          "name": "Process Document-Control Pair",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/ai/process?document_id={{document_id}}&control_id={{control_id}}&force_regenerate=false",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "ai", "process"],
+              "query": [
+                {
+                  "key": "document_id",
+                  "value": "{{document_id}}"
+                },
+                {
+                  "key": "control_id",
+                  "value": "{{control_id}}"
+                },
+                {
+                  "key": "force_regenerate",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Regenerate Specific AI Response",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ai_response_id\": \"{{ai_response_id}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/ai/regenerate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "ai", "regenerate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Regenerate All Responses for Control",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"control_id\": \"{{control_id}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/ai/regenerate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "ai", "regenerate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Regenerate All Responses for Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document_id\": \"{{document_id}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/ai/regenerate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "ai", "regenerate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get AI Processing Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/ai/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{api_version}}", "ai", "status"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set dynamic variables if needed",
+          "// pm.environment.set('timestamp', new Date().toISOString());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Basic response validation",
+          "pm.test('Status code is successful', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+          "});",
+          "",
+          "// Parse and set response data for next requests",
+          "if (pm.response.code === 200 || pm.response.code === 201) {",
+          "    try {",
+          "        const responseJson = pm.response.json();",
+          "        ",
+          "        // Set control_id if this was a control creation",
+          "        if (responseJson.id && pm.request.url.path.includes('controls')) {",
+          "            pm.environment.set('control_id', responseJson.id);",
+          "        }",
+          "        ",
+          "        // Set document_id if this was a document upload",
+          "        if (responseJson.id && pm.request.url.path.includes('documents')) {",
+          "            pm.environment.set('document_id', responseJson.id);",
+          "        }",
+          "        ",
+          "        // Set ai_response_id if this was an AI response",
+          "        if (responseJson.id && pm.request.url.path.includes('ai')) {",
+          "            pm.environment.set('ai_response_id', responseJson.id);",
+          "        }",
+          "",
+          "        // Set file_path from upload URL response",
+          "        if (responseJson.file_path) {",
+          "            pm.environment.set('file_path', responseJson.file_path);",
+          "        }",
+          "    } catch (e) {",
+          "        console.log('Could not parse response JSON');",
+          "    }",
+          "}"
+        ]
+      }
+    }
+  ]
+} 

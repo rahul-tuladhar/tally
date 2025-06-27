@@ -1,0 +1,25 @@
+[default]
+# OpenAI Configuration
+OPENAI_MODEL = "gpt-4"
+OPENAI_TEMPERATURE = 0.1
+OPENAI_MAX_TOKENS = 1000
+
+# CORS
+ALLOWED_HOSTS = ["*"]
+
+# Storage Configuration
+DEFAULT_BUCKET_NAME = "tally-documents"
+UPLOAD_MAX_SIZE = 52428800  # 50MB (Free tier limit)
+PRESIGNED_URL_EXPIRY = 3600  # 1 hour in seconds
+
+[development]
+# Development-specific settings - using asyncpg
+DATABASE_URL = "postgresql+asyncpg://postgres:f2Kzb3IK4%5EB6FJ%25T@db.tofyxmdctxlagncvqhpg.supabase.co:5432/postgres"
+
+[production]
+# Production-specific settings - using asyncpg
+DATABASE_URL = "postgresql+asyncpg://postgres:f2Kzb3IK4%5EB6FJ%25T@db.tofyxmdctxlagncvqhpg.supabase.co:5432/postgres"
+ALLOWED_HOSTS = [
+    "https://tally-onsite.vercel.app",
+    "http://localhost:3000"
+] 

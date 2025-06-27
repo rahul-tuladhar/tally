@@ -1,0 +1,115 @@
+{
+    "info": {
+        "name": "Tally Test APIs",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Test OpenAI Completion",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"input_text\": \"What are the key components of an effective governance structure?\"\n}"
+                },
+                "url": "http://localhost:8000/openai/completion"
+            },
+            "response": [
+                {
+                    "name": "Example Response",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"input_text\": \"What are the key components of an effective governance structure?\"\n}"
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n    \"response\": \"An effective governance structure typically includes clear leadership roles, well-defined policies and procedures, accountability mechanisms, and regular monitoring and reporting processes.\",\n    \"usage\": {\n        \"prompt_tokens\": 14,\n        \"completion_tokens\": 27,\n        \"total_tokens\": 41\n    }\n}"
+                }
+            ]
+        },
+        {
+            "name": "Test Reducto + OpenAI Analysis",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "file",
+                            "type": "file",
+                            "src": []
+                        },
+                        {
+                            "key": "title",
+                            "value": "Data Protection Policy",
+                            "type": "text"
+                        },
+                        {
+                            "key": "description",
+                            "value": "Organization must have comprehensive data protection policies that outline how personal and sensitive data is collected, stored, processed, and protected.",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": "http://localhost:8000/reducto/openai"
+            },
+            "response": [
+                {
+                    "name": "Example Response",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "file",
+                                    "type": "file",
+                                    "src": []
+                                },
+                                {
+                                    "key": "title",
+                                    "value": "Data Protection Policy",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "Organization must have comprehensive data protection policies that outline how personal and sensitive data is collected, stored, processed, and protected.",
+                                    "type": "text"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n    \"reducto_processing\": {\n        \"parse_result\": {\n            \"document_id\": \"doc_abc123\",\n            \"status\": \"COMPLETED\"\n        },\n        \"extract_result\": {\n            \"content\": \"Document content extracted by Reducto...\",\n            \"citations\": []\n        }\n    },\n    \"openai_analysis\": {\n        \"response\": \"Based on the analysis of the document...\",\n        \"usage\": {\n            \"prompt_tokens\": 450,\n            \"completion_tokens\": 150,\n            \"total_tokens\": 600\n        }\n    }\n}"
+                }
+            ]
+        }
+    ]
+} 

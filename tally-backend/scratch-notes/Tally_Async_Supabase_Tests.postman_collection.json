@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "a8b3c4d5-e6f7-8g9h-0i1j-2k3l4m5n6o7p",
+		"name": "Tally Async Supabase Tests",
+		"description": "Collection for testing async Supabase endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/health",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8001",
+					"path": ["health"]
+				}
+			}
+		},
+		{
+			"name": "Test Storage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/test_storage",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8001",
+					"path": ["test_storage"]
+				}
+			}
+		},
+		{
+			"name": "Upload Document",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "bucket_name",
+							"value": "documents",
+							"type": "text",
+							"description": "Name of the bucket to upload to"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8001/upload_document",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8001",
+					"path": ["upload_document"]
+				},
+				"description": "Upload a document to Supabase storage bucket"
+			}
+		},
+		{
+			"name": "Test Database",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/test_database",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8001",
+					"path": ["test_database"]
+				}
+			}
+		}
+	]
+} 

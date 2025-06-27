@@ -1,0 +1,65 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Tally Project Structure Rules
+
+## Project Overview
+This is the Tally tabular review application with a separated frontend and backend architecture.
+
+## Directory Structure
+
+### Frontend (`tally-frontend/`)
+- **Main app**: [tally-frontend/app/root.tsx](mdc:tally-frontend/app/root.tsx) - Root layout
+- **Routes**: [tally-frontend/app/routes.ts](mdc:tally-frontend/app/routes.ts) - Route configuration
+- **Primary route**: [tally-frontend/app/routes/tabular-review.tsx](mdc:tally-frontend/app/routes/tabular-review.tsx) - Main tabular interface
+- **Core component**: [tally-frontend/components/tabular-review.tsx](mdc:tally-frontend/components/tabular-review.tsx) - TanStack Table implementation
+- **UI components**: Located in [tally-frontend/components/ui/](mdc:tally-frontend/components/ui) directory
+- **Utilities**: [tally-frontend/lib/utils.ts](mdc:tally-frontend/lib/utils.ts) - Helper functions
+
+### Backend (`tally-backend/`)
+- **Entry point**: [tally-backend/app/main.py](mdc:tally-backend/app/main.py) - FastAPI application using uv
+- **Configuration**: [tally-backend/app/config.py](mdc:tally-backend/app/config.py) - App settings
+- **Models**: [tally-backend/app/models.py](mdc:tally-backend/app/models.py) - Database models
+- **API schemas**: [tally-backend/app/schemas.py](mdc:tally-backend/app/schemas.py) - Pydantic models
+- **Services**: Located in [tally-backend/app/services/](mdc:tally-backend/app/services) directory
+
+## Import Rules
+
+### Frontend Import Patterns
+1. **App directory imports**: Use `~/*` alias
+   ```typescript
+   import { Welcome } from "~/welcome/welcome";
+   ```
+
+2. **Components outside app**: Use relative paths
+   ```typescript
+   import { TabularReview } from "../../components/tabular-review";
+   ```
+
+3. **UI components**: Use relative paths within components
+   ```typescript
+   import { Button } from "./ui/button";
+   ```
+
+### TypeScript Configuration
+- Path mapping in [tally-frontend/tsconfig.json](mdc:tally-frontend/tsconfig.json):
+  - `~/*` → `./app/*`
+  - `@/*` → `./*`
+
+## Key Components
+
+### Tabular Review System
+- **Route**: [tally-frontend/app/routes/tabular-review.tsx](mdc:tally-frontend/app/routes/tabular-review.tsx) handles routing and state
+- **Component**: [tally-frontend/components/tabular-review.tsx](mdc:tally-frontend/components/tabular-review.tsx) implements the table interface
+- **Features**: Document upload, control management, AI processing simulation
+
+### UI System
+- Built with Radix UI and Tailwind CSS
+- Components follow shadcn/ui patterns
+- Located in [tally-frontend/components/ui/](mdc:tally-frontend/components/ui) directory
+
+## Development Commands
+- Frontend: `cd tally-frontend && npm run dev` (port 5173)
+- Backend: `cd tally-backend && uvicorn app.main:app --reload` (port 8000)
