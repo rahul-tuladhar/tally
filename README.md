@@ -80,22 +80,12 @@ tally/
 
 1. Install dependencies:
 ```bash
-cd tally-backend
-uv sync
+pip install fastapi uvicorn python-multipart openai reductoai supabase httpx
 ```
 
-2. Configure settings in `.secrets.toml`:
-```toml
-[default]
-OPENAI_API_KEY = "your_openai_key"
-REDUCTO_API_KEY = "your_reducto_key"
-SUPABASE_URL = "your_supabase_url"
-SUPABASE_KEY = "your_supabase_key"
-```
-
-3. Run the development server:
+2. Run the development server:
 ```bash
-uvicorn app.main:app --reload
+python simple_api_server.py
 ```
 
 ### Frontend Setup
